@@ -1,4 +1,4 @@
-// COVID-19 Country Status ver. 1.02
+// COVID-19 Country Status ver. 1.03
 // Mariosnb 2021
 
 var country = "";
@@ -47,7 +47,7 @@ function search() {
         throw new Error("country not found")
       else
         div.innerHTML += `<span class="flag">${country2emoji2(countryCode)}</span><br>`
-        div.innerHTML += `Η χώρα διαμονής σας - ${country} έχει πληθυσμό: ${reply[0].population} κατοίκους. <br>`;
+        div.innerHTML += `Η χώρα διαμονής σας - ${country} έχει πληθυσμό: ${reply[0].population.toLocaleString()} κατοίκους. <br>`;
     });
 }
 
@@ -67,8 +67,8 @@ function covid() {
         throw new Error("country not found")
       else
         div2.classList.add("covid");
-      div2.innerHTML += `<br> Η χώρα έχει ${reply.All.deaths} νεκρούς, <br>`;
-      div2.innerHTML += `${reply.All.confirmed} που έχουν νοσήσει και ${reply.All.recovered} που έχουν αναρώσει.<br>`;
+      div2.innerHTML += `<br> Η χώρα έχει ${reply.All.deaths.toLocaleString()} νεκρούς, <br>`;
+      div2.innerHTML += `${reply.All.confirmed.toLocaleString()} που έχουν νοσήσει και ${reply.All.recovered.toLocaleString()} που έχουν αναρώσει.<br>`;
     });
 }
 
