@@ -1,0 +1,51 @@
+/* COVID-19 Country Status ver. 1.0 */
+/* Mariosnb 2021 */
+
+:root {
+    font-size: 1.2em;
+}
+
+body {
+    height: 100vh;
+    background-image: url("../img/backimg.jpg");        /* Photo by CDC from Pexels */
+    background-color: #000000;
+    background-position:initial;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.covid {
+    width: 400px;
+    min-height: 40vh;
+    margin-top: 30px;
+    margin-left: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-bottom: 30px;
+    background: linear-gradient(to right bottom, rgba(252, 20, 20, 0.8), rgba(221, 206, 206, 0.3));
+    border-radius: 32px;
+    z-index: 2;
+    backdrop-filter: blur(2rem);
+    color: whitesmoke;
+    text-align: center;
+    line-height: 1.5;
+}
+
+h1 {
+    margin-bottom: 0;
+}
+
+.flag {
+    font-size: 3em;
+}
+
+@media only screen and (max-width: 600px) {
+    body {
+        background-image: url("../img/backimg-sm.jpg");         /* Photo by CDC from Pexels */
+    }
+
+    .covid {
+        width: 90%;
+        margin-left: 15px;
+    }
+}
