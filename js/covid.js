@@ -1,4 +1,4 @@
-// COVID-19 Country Status ver. 1.0
+// COVID-19 Country Status ver. 1.02
 // Mariosnb 2021
 
 var country = "";
@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
 function searchCode(code) {
   const urlCode = "https://restcountries.eu/rest/v2/alpha/";
 
-  fetch(urlCode + countryCode)
+  fetch(urlCode + code)
     .then((reply) => {
       if (reply.status == 200)
         return reply.json();
@@ -25,6 +25,7 @@ function searchCode(code) {
         throw new Error("country not found")
       else {
         country = reply.name;
+        countryCode = reply.alpha2Code;
         search();
         covid();
       }
@@ -45,8 +46,8 @@ function search() {
       if (reply.length < 1)
         throw new Error("country not found")
       else
-        div.innerHTML += `<span class="flag">${country2emoji2("DE")}</span><br>`
-      div.innerHTML += `Η χώρα διαμονής σας - ${country} έχει πληθυσμό: ${reply[0].population} κατοίκους. <br>`;
+        div.innerHTML += `<span class="flag">${country2emoji2(countryCode)}</span><br>`
+        div.innerHTML += `Η χώρα διαμονής σας - ${country} έχει πληθυσμό: ${reply[0].population} κατοίκους. <br>`;
     });
 }
 
