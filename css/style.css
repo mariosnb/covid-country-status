@@ -1,4 +1,4 @@
-/* COVID-19 Country Status ver. 1.0 */
+/* COVID-19 Country Status ver. 1.02 */
 /* Mariosnb 2021 */
 
 :root {
@@ -9,7 +9,7 @@ body {
     height: 100vh;
     background-image: url("../img/backimg.jpg");        /* Photo by CDC from Pexels */
     background-color: #000000;
-    background-position:initial;
+    background-position: initial;
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -39,13 +39,16 @@ h1 {
     font-size: 3em;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 575.98px) {
     body {
         background-image: url("../img/backimg-sm.jpg");         /* Photo by CDC from Pexels */
+        height: inherit;
+        background-repeat: repeat;
     }
 
     .covid {
         width: 90%;
+        margin-top: 8%;
         margin-left: 15px;
     }
 }
