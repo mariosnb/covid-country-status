@@ -1,2 +1,2 @@
 # covid-country-status
-COVID-19 Country Status ver. 1.0
+COVID-19 Country Status ver. 1.04
