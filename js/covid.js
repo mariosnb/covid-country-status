@@ -1,18 +1,19 @@
-// COVID-19 Country Status ver. 1.03
-// Mariosnb 2021
+// COVID-19 Country Status ver. 1.04
+// Mariosnb 2022
 
-var country = "";
-var countryCode = "";
+var country = '';
+var countryCode = '';
 
 document.addEventListener("DOMContentLoaded", () => {
   $.get("https://ipinfo.io", function(response) {
     countryCode = response.country;
-    searchCode(response.country);
+    // console.log(response) // ipinfo Obj
+    searchCode(countryCode);
   }, "jsonp");
 });
 
 function searchCode(code) {
-  const urlCode = "https://restcountries.eu/rest/v2/alpha/";
+  const urlCode = "https://restcountries.com/v3.1/alpha/";
 
   fetch(urlCode + code)
     .then((reply) => {
@@ -24,8 +25,8 @@ function searchCode(code) {
       if (reply.length < 1)
         throw new Error("country not found")
       else {
-        country = reply.name;
-        countryCode = reply.alpha2Code;
+        country = reply[0].name.common;
+        countryCode = reply[0].cca2;
         search();
         covid();
       }
@@ -34,7 +35,7 @@ function searchCode(code) {
 
 function search() {
   const div = document.querySelector("#id");
-  const urlName = "https://restcountries.eu/rest/v2/name/";
+  const urlName = "https://restcountries.com/v3.1/name/";
 
   fetch(urlName + country)
     .then((reply) => {
@@ -47,15 +48,16 @@ function search() {
         throw new Error("country not found")
       else
         div.innerHTML += `<span class="flag">${country2emoji2(countryCode)}</span><br>`
-        div.innerHTML += `Η χώρα διαμονής σας - ${country} έχει πληθυσμό: ${reply[0].population.toLocaleString()} κατοίκους. <br>`;
-    });
+        div.innerHTML += `Your country of residence - ${country} It has a population: ${reply[0].population.toLocaleString()} residents. <br>`;
+        // console.log(reply) // Country Object
+      });
 }
 
 function covid() {
   const div2 = document.querySelector("#id");
   const url2 = "https://covid-api.mmediagroup.fr/v1/cases?country=";
   let fletter = country.slice(0, 1); // Slice the first letter to make it capital
-
+  
   fetch(url2 + fletter.toUpperCase() + country.slice(1, country.length).toLowerCase())
     .then((reply) => {
       if (reply.status == 200)
@@ -67,8 +69,9 @@ function covid() {
         throw new Error("country not found")
       else
         div2.classList.add("covid");
-      div2.innerHTML += `<br> Η χώρα έχει ${reply.All.deaths.toLocaleString()} νεκρούς, <br>`;
-      div2.innerHTML += `${reply.All.confirmed.toLocaleString()} που έχουν νοσήσει και ${reply.All.recovered.toLocaleString()} που έχουν αναρώσει.<br>`;
+      div2.innerHTML += `<br> The country has ${reply.All.deaths.toLocaleString()} deads, <br>`;
+      div2.innerHTML += `${reply.All.confirmed.toLocaleString()} who have become ill and ${reply.All.recovered.toLocaleString()} who have recovered.<br>`;
+      // console.log(reply.All)  // Covid Object
     });
 }
 
